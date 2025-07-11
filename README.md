@@ -5,7 +5,7 @@ A daily portfolio analysis and recommendation system powered by AI that generate
 ## Features
 
 - **Daily Analysis**: Automated portfolio analysis at 9AM ET every day
-- **AI-Powered Insights**: ReAct agent using OpenAI's o3 model with high reasoning effort
+- **AI-Powered Insights**: ReAct agent using OpenAI's gpt4.1 model
 - **Multi-Source Data**: Integrates Robinhood API, Aiera API, and Tavily search
 - **Comprehensive Reports**: Technical analysis, sentiment analysis, and risk assessment
 - **Clean Email Reports**: Minimal, aesthetically pleasing HTML email reports
@@ -30,7 +30,7 @@ EventBridge (9AM ET daily) → Lambda Function → [Data Sources] → ReAct Agen
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/jacquelinegarrahan/quantasaurus-rex.git
 cd quantasaurus-rex
 ```
 
@@ -86,33 +86,6 @@ poetry run pytest --cov=src
 poetry run pytest -m unit
 poetry run pytest -m integration
 ```
-
-## API Rate Limiting & Retry Logic
-
-The system includes robust retry mechanisms with exponential backoff for OpenAI API calls:
-
-### Retry Configuration
-
-- **Max Retries**: 5 attempts (configurable)
-- **Base Delay**: 2 seconds (configurable)
-- **Max Delay**: 60 seconds (configurable)
-- **Exponential Base**: 2.0 (configurable)
-- **Jitter**: Enabled to prevent thundering herd
-- **Backoff Multiplier**: 1.5 for gentler progression
-
-### Rate Limiting
-
-- **Request Delay**: 1 second between API calls
-- **Graceful Degradation**: Falls back to basic analysis when API is unavailable
-- **Caching**: Daily analysis caching to reduce API calls
-
-### Retry Logic
-
-The system automatically retries on:
-- **429 Rate Limit Errors**: With exponential backoff
-- **Connection Errors**: Network timeouts and connection issues
-- **5xx Server Errors**: OpenAI server-side errors
-- **Quota Exceeded**: With appropriate error handling
 
 ### Usage
 
