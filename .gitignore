@@ -144,6 +144,12 @@ ENV/
 env.bak/
 venv.bak/
 
+# Poetry
+poetry.lock
+.venv/
+dist/
+*.egg-info/
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -205,3 +211,73 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# =================================================================
+# Quantasaurus-Rex Specific
+# =================================================================
+
+# Environment and Configuration
+.env.local
+.env.production
+.env.development
+config.ini
+secrets.json
+
+# AWS and Deployment
+.aws/
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+deployment/secrets/
+deployment/config/production.json
+
+# Lambda Deployment
+lambda-deployment-package.zip
+deployment-package/
+lambda-layer/
+
+# Data Files
+data/
+*.csv
+*.xlsx
+*.parquet
+
+# Temporary Files
+tmp/
+temp/
+.tmp/
+*.tmp
+*.bak
+*.backup
+
+# API Keys and Credentials
+credentials.json
+api_keys.json
+*.pem
+*.key
+*.crt
+*.p12
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Email Templates (generated)
+email_output/
+email_debug/
+
+# Local Development
+local_data/
+test_output/
+debug_output/
+
+# Quantasaurus device storage
+.quantasaurus/
+
+.python-version
