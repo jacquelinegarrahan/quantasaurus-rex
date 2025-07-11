@@ -122,17 +122,23 @@ poetry run python lambda_function.py
 ```
 
 ### 7. Robinhood Authentication Process
-The system uses a hybrid approach with device tokens and sheriff challenges:
+The system uses the proven working approach from the robin-stocks community:
 
-1. **Device Token**: System generates/loads a unique device token for your account
-2. **Initial Login**: Attempts authentication with username, password, and device token
-3. **Sheriff Challenge**: If triggered, validates using your MFA code
+1. **Device Token**: System generates unique device token using correct algorithm
+2. **Complete Login Payload**: Uses all required fields for modern Robinhood API
+3. **Sheriff Challenge**: If triggered, uses polling approach to wait for validation
 4. **Success**: Access token is obtained and device token is saved for future use
 
 **Authentication Flow:**
-- **Success Path**: Direct login with device token
-- **Sheriff Challenge Path**: Login → Sheriff Challenge → MFA Validation → Retry Login
+- **Success Path**: Direct login with proper payload format
+- **Sheriff Challenge Path**: Login → Sheriff Challenge → Polling Validation → Retry Login
 - **Persistent Storage**: Device tokens are saved to avoid repeated challenges
+
+**Key Implementation Details:**
+- **Device Token Generation**: Uses correct random number algorithm from mods.py
+- **Sheriff Challenge Validation**: Polls `/push/{id}/get_prompts_status/` endpoint
+- **Login Payload**: Includes all required fields: `challenge_type`, `try_passkeys`, `token_request_path`, etc.
+- **Response Parsing**: Uses correct JSON paths (`context` instead of `type_context`)
 
 **Configuration Options:**
 - `ROBINHOOD_MFA_CODE` - Your MFA code for sheriff challenges (required)
