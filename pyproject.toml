@@ -3,6 +3,7 @@ name = "quantasaurus-rex"
 version = "1.0.0"
 description = "Daily portfolio analysis and recommendation system powered by AI"
 authors = ["Jacqueline Garrahan <jacquelinegarrahan@gmail.com>"]
+license = "MIT"
 readme = "README.md"
 packages = [{include = "src"}]
 
